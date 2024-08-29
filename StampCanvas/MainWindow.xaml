@@ -1,0 +1,107 @@
+﻿<Window x:Class="Stampify.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Stampify - Image Editor" Height="800" Width="1200">
+    <DockPanel>
+        <!-- Main Menu -->
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="File">
+                <MenuItem Header="Load Images" Click="LoadImagesButton_Click"/>
+                <MenuItem Header="Save" Click="SaveComposition_Click"/>
+                <MenuItem Header="Export" Click="Export_Click"/>
+            </MenuItem>
+            <MenuItem Header="Edit">
+                <MenuItem Header="Undo" Click="Undo_Click"/>
+                <MenuItem Header="Redo" Click="Redo_Click"/>
+                <MenuItem Header="History" Click="History_Click"/>
+            </MenuItem>
+            <MenuItem Header="View">
+                <MenuItem Header="Show/Hide Grids" Click="ToggleGrids_Click"/>
+                <MenuItem Header="Show/Hide Guides" Click="ToggleGuides_Click"/>
+                <MenuItem Header="Zoom In" Click="ZoomIn_Click"/>
+                <MenuItem Header="Zoom Out" Click="ZoomOut_Click"/>
+            </MenuItem>
+            <MenuItem Header="Image">
+                <MenuItem Header="Color Adjustments" Click="OpenColorAdjustments_Click"/>
+                <MenuItem Header="Filters" Click="OpenFilters_Click"/>
+                <MenuItem Header="Effects" Click="OpenEffects_Click"/>
+            </MenuItem>
+            <MenuItem Header="Layers">
+                <MenuItem Header="Layer Management" Click="OpenLayerManagement_Click"/>
+                <MenuItem Header="Blend Modes" Click="OpenBlendModes_Click"/>
+                <MenuItem Header="Clipping" Click="OpenClipping_Click"/>
+                <MenuItem Header="Masking" Click="OpenMasking_Click"/>
+            </MenuItem>
+            <MenuItem Header="Text">
+                <MenuItem Header="Add Text" Click="AddText_Click"/>
+                <MenuItem Header="Font Settings" Click="OpenFontSettings_Click"/>
+            </MenuItem>
+            <MenuItem Header="Help">
+                <MenuItem Header="User Guide" Click="OpenUserGuide_Click"/>
+                <MenuItem Header="About" Click="OpenAbout_Click"/>
+            </MenuItem>
+        </Menu>
+
+        <!-- Sidebar with Tabs -->
+        <TabControl DockPanel.Dock="Left" Width="300">
+            <!-- Image Library Tab -->
+            <TabItem Header="Image Library">
+                <StackPanel>
+                    <ListBox x:Name="ImageLibrary" Height="464" Margin="5"
+                             Background="White"
+                             SelectionChanged="ImageLibrary_SelectionChanged"
+                             PreviewMouseLeftButtonDown="ImageLibrary_PreviewMouseLeftButtonDown"/>
+                </StackPanel>
+            </TabItem>
+            <!-- Layers Tab -->
+            <TabItem Header="Layers">
+                <StackPanel>
+                    <!-- Layers Panel -->
+                    <Button Content="Add Layer" Click="AddLayer_Click" Margin="5"/>
+                    <Button Content="Delete Layer" Click="DeleteLayer_Click" Margin="5"/>
+                    <!-- Add more layer management tools here -->
+                </StackPanel>
+            </TabItem>
+            <!-- Color Adjustments Tab -->
+            <TabItem Header="Color Adjustments">
+                <StackPanel>
+                    <TextBlock Text="Brightness" Margin="5"/>
+                    <Slider x:Name="BrightnessSlider" Minimum="-10" Maximum="10" Value="0" TickFrequency="1" ValueChanged="BrightnessSlider_ValueChanged" Margin="5"/>
+                    <TextBlock Text="Contrast" Margin="5"/>
+                    <Slider x:Name="ContrastSlider" Minimum="-10" Maximum="10" Value="0" TickFrequency="1" ValueChanged="ContrastSlider_ValueChanged" Margin="5"/>
+                    <TextBlock Text="Hue" Margin="5"/>
+                    <Slider x:Name="HueSlider" Minimum="-180" Maximum="180" Value="0" TickFrequency="10" ValueChanged="HueSlider_ValueChanged" Margin="5"/>
+                    <TextBlock Text="Saturation" Margin="5"/>
+                    <Slider x:Name="SaturationSlider" Minimum="-1" Maximum="1" Value="0" TickFrequency="0.1" ValueChanged="SaturationSlider_ValueChanged" Margin="5"/>
+                </StackPanel>
+            </TabItem>
+            <!-- Filters and Effects Tab -->
+            <TabItem Header="Filters &amp; Effects">
+                <StackPanel>
+                    <Button Content="Apply Blur" Click="ApplyBlur_Click" Margin="5"/>
+                    <Button Content="Apply Sharpen" Click="ApplySharpen_Click" Margin="5"/>
+                    <!-- Add more filter and effect tools here -->
+                </StackPanel>
+            </TabItem>
+            <!-- New Tab for Object Info -->
+            <TabItem Header="Object Info">
+                <StackPanel>
+                    <TextBlock Text="Object Properties" FontWeight="Bold" Margin="5"/>
+                    <!-- Z-Order Display -->
+                    <TextBlock Text="Z-Order:" Margin="5"/>
+                    <TextBox x:Name="ZOrderTextBox" IsReadOnly="True" Margin="5"/>
+                    <!-- Position Display -->
+                    <TextBlock Text="Position:" Margin="5"/>
+                    <TextBox x:Name="PositionTextBox" IsReadOnly="True" Margin="5"/>
+                    <!-- Size Display -->
+                    <TextBlock Text="Size:" Margin="5"/>
+                    <TextBox x:Name="SizeTextBox" IsReadOnly="True" Margin="5"/>
+                    <!-- More properties can be added here -->
+                </StackPanel>
+            </TabItem>
+        </TabControl>
+
+        <!-- Main Canvas -->
+        <Canvas x:Name="MainCanvas" Background="White" AllowDrop="True" Drop="MainCanvas_Drop" DragOver="MainCanvas_DragOver"/>
+    </DockPanel>
+</Window>
